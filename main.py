@@ -13,7 +13,7 @@ class CalculusApp:
         self.root = root
         self.root.title("Calculus-Powered Graphing App")
         self.root.geometry("450x500")
-        self.root.configure(bg='#f4f4f9')
+        self.root.configure(bg="#f4f4f9")
 
         tk.Label(root, text="Calculus-Powered Graphing App",
                 font=("Arial", 14, "bold"), 
@@ -25,13 +25,25 @@ class CalculusApp:
         self.mode_menu = tk.OptionMenu(root, self.mode_var, "Area Under Curve", "Between Curves", command=self.toggle_inputs)
         self.mode_menu.pack(pady=5)
 
-        tk.Label(root, text="function f(x):", bg="#f4f4f9").pack()
-        self.f1_input = tk.Entry(root, width=30)
+
+        border_frame = tk.Frame(root, bg='#2c3e50', bd=0)
+        border_frame.pack(pady=10)
+        self.f1_lablel = tk.Label(root, text="function f(x):", bg="#f4f4f9").pack()
+        self.f1_input = tk.Entry(root,
+                                 font=("Arial", 12), 
+                                 bg="white", 
+                                 fg='#333', 
+                                 relief="flat")
         self.f1_input.insert(0, '0')
-        self.f1_input.pack()
+        self.f1_input.pack(pady=5)
+
 
         self.f2_label = tk.Label(root, text="function g(x):", bg='#f4f4f9')
-        self.f2_input = tk.Entry(root, width=30)
+        self.f2_input = tk.Entry(root,
+                                font=("Arial", 12),
+                                bg="white",
+                                fg='#333',
+                                relief="flat")
 
         tk.Label(root, text="x range (Start, End):", bg='#f4f4f9').pack(pady=5)
         self.range_frame = tk.Frame(root, bg='#f4f4f9')
@@ -46,7 +58,13 @@ class CalculusApp:
         self.end_x.pack(side=tk.LEFT)
 
         self.btn = tk.Button(root, text="Calculate & Plot", command=self.process_data, 
-                             bg='#2c3e50', fg="white", pady=10)
+                             bg='#2c3e50', fg="white",
+                             font=("Arial", 8, "bold"),
+                             relief="flat",
+                             activebackground='#34495e',
+                             activeforeground="white",
+                             cursor="hand2",
+                             padx=5, pady=5)
         self.btn.pack(pady=20)
 
 
