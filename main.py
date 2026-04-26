@@ -3,6 +3,7 @@ from tkinter import messagebox
 import sympy as sp
 import numpy as np
 from fractions import Fraction
+from PIL import Image, ImageTk
 
 import calc_logic as calc
 import visualizer as vslr
@@ -13,40 +14,41 @@ class CalculusApp:
         self.root = root
         self.root.title("Calculus-Powered Graphing App")
         self.root.geometry("450x500")
-        self.root.configure(bg="#f4f4f9")
 
-        tk.Label(root, text="Calculus-Powered Graphing App",
-                font=("Arial", 14, "bold"), 
-                bg='#f4f4f9').pack(pady=10)
+        self.original_image = Image.open("assets/background.jpg")
+        self.bg_label = tk.Label(root)
+        self.bg_label.place(x=0, y=0, relwidth=1, relheight=1)
+
+        self.root.bind('<Configure>', self.resize_background)
+
+        self.main_container = tk.Frame(root, bg='#ffffff', bd=0, padx=20, pady=20)
+        self.main_container.place(relx=0.5, rely=0.5, anchor="center")
+
+        tk.Label(self.main_container, text="Calculus-Powered Graphing App",
+                font=("Arial", 14, "bold"),
+                fg='#253759', 
+                bg='#ffffff').pack(pady=10)
         
-        tk.Label(root, text="Select Mode:", bg='#f4f4f9').pack()
+        tk.Label(self.main_container, text="Select Mode:", fg='#2c3e50', bg='#ffffff').pack()
         self.mode_var = tk.StringVar(root)
         self.mode_var.set("Area Under Curve")
-        self.mode_menu = tk.OptionMenu(root, self.mode_var, "Area Under Curve", "Between Curves", command=self.toggle_inputs)
+        self.mode_menu = tk.OptionMenu(self.main_container, self.mode_var, "Area Under Curve", "Between Curves", command=self.toggle_inputs)
         self.mode_menu.pack(pady=5)
 
 
-        border_frame = tk.Frame(root, bg='#2c3e50', bd=0)
+        border_frame = tk.Frame(self.main_container, bg='#2c3e50', bd=0)
         border_frame.pack(pady=10)
-        self.f1_lablel = tk.Label(root, text="function f(x):", bg="#f4f4f9").pack()
-        self.f1_input = tk.Entry(root,
-                                 font=("Arial", 12), 
-                                 bg="white", 
-                                 fg='#333', 
-                                 relief="flat")
+        self.f1_lablel = tk.Label(self.main_container, text="function f(x):", fg='#2c3e50', bg="#ffffff").pack()
+        self.f1_input = tk.Entry(self.main_container, bg='#f4f4f9', font=("Arial", 12))
         self.f1_input.insert(0, '0')
         self.f1_input.pack(pady=5)
 
 
-        self.f2_label = tk.Label(root, text="function g(x):", bg='#f4f4f9')
-        self.f2_input = tk.Entry(root,
-                                font=("Arial", 12),
-                                bg="white",
-                                fg='#333',
-                                relief="flat")
+        self.f2_label = tk.Label(self.main_container, text="function g(x):", bg='#ffffff')
+        self.f2_input = tk.Entry(self.main_container, bg='#f4f4f9', font=("Arial", 12))
 
-        tk.Label(root, text="x range (Start, End):", bg='#f4f4f9').pack(pady=5)
-        self.range_frame = tk.Frame(root, bg='#f4f4f9')
+        tk.Label(self.main_container, text="x range (Start, End):", fg='#2c3e50', bg='#ffffff').pack(pady=5)
+        self.range_frame = tk.Frame(self.main_container, bg='#f4f4f9')
         self.range_frame.pack()
 
         self.start_x = tk.Entry(self.range_frame, width=10)
@@ -57,7 +59,7 @@ class CalculusApp:
         self.end_x.insert(0, '0')
         self.end_x.pack(side=tk.LEFT)
 
-        self.btn = tk.Button(root, text="Calculate & Plot", command=self.process_data, 
+        self.btn = tk.Button(self.main_container, text="Calculate & Plot", command=self.process_data, 
                              bg='#2c3e50', fg="white",
                              font=("Arial", 8, "bold"),
                              relief="flat",
@@ -66,6 +68,17 @@ class CalculusApp:
                              cursor="hand2",
                              padx=5, pady=5)
         self.btn.pack(pady=20)
+
+        
+    def resize_background(self, event):
+        new_width = event.width
+        new_height = event.height
+
+        resized_img = self.original_image.resize((new_width, new_height), Image.LANCZOS)
+        self.bg_photo = ImageTk.PhotoImage(resized_img)
+
+        self.bg_label.config(image=self.bg_photo)
+        
 
 
     def toggle_inputs(self, selection):
@@ -120,7 +133,7 @@ class CalculusApp:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    logo = tk.PhotoImage(file='logo\calculus_logo.png')
+    logo = tk.PhotoImage(file='assets\calculus_logo.png')
     root.wm_iconphoto(False, logo)
     app = CalculusApp(root)
     root.mainloop()
