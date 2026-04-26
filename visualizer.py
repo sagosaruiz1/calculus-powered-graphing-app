@@ -30,6 +30,6 @@ def generate_plot(x_values, y1_values, y2_values, deriv_values, f1_str, f2_str, 
     plt.grid(True, linestyle=':', alpha=0.6)
 
     plt.savefig("calculus_output.png")
-    print("Success: Graph saved as 'calculus_output.png'")
+    print("Success: Graph saved as '<rename_this_image>.png'")
 
     plt.show()
