@@ -29,7 +29,7 @@ def generate_plot(x_values, y1_values, y2_values, deriv_values, f1_str, f2_str, 
     plt.legend()
     plt.grid(True, linestyle=':', alpha=0.6)
 
-    plt.savefig("<rename_this_image>.png")
+    plt.savefig("rename_this_image.png")
     print("Success: Graph saved as '<rename_this_image>.png'")
 
     plt.show()
