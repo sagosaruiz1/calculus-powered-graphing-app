@@ -21,7 +21,7 @@ class CalculusApp:
 
         self.root.bind('<Configure>', self.resize_background)
 
-        self.main_container = tk.Frame(root, bg='#f4f4f9', bd=0, padx=20, pady=20)
+        self.main_container = tk.Frame(root, bg='#ffffff', bd=0, padx=20, pady=20)
         self.main_container.place(relx=0.5, rely=0.5, anchor="center")
 
         tk.Label(self.main_container, text="Calculus-Powered Graphing App",
