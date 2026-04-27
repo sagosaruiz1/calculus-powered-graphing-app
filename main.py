@@ -47,7 +47,7 @@ class CalculusApp:
         self.f2_label = tk.Label(self.main_container, text="function g(x):", bg='#ffffff')
         self.f2_input = tk.Entry(self.main_container, bg='#f4f4f9', font=("Arial", 12))
 
-        tk.Label(self.main_container, text="x range (Start, End):", fg='#2c3e50', bg='#ffffff').pack(pady=5)
+        tk.Label(self.main_container, text="starting point and ending point (a, b):", fg='#2c3e50', bg='#ffffff').pack(pady=5)
         self.range_frame = tk.Frame(self.main_container, bg='#f4f4f9')
         self.range_frame.pack()
 
