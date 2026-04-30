@@ -3,9 +3,9 @@ from scipy.integrate import quad
 
 
 
-def get_derivative(f, x_vals, dx=1e-6):
+def get_derivative(f, x_values, dx=1e-6):
 
-    return (f(x_vals + dx) - f(x_vals)) / dx
+    return (f(x_values + dx) - f(x_values)) / dx
 
 def get_integral(f1, f2, start, end):
   
